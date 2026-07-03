@@ -1,0 +1,27 @@
+nav {
+  background-color: #2563eb;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav h2 {
+  color: white;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 15px;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: yellow;
+}
+
+nav h2{
+  font-size: 28px;
+  font-weight: bold;
+}
