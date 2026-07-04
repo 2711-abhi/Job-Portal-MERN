@@ -20,7 +20,7 @@ function Register() {
   const handleSubmit = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/register",
+        "https://jobportal-backend-gkor.onrender.com/api/auth/register",
         user
       );
 

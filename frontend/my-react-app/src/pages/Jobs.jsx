@@ -13,7 +13,7 @@ function Jobs() {
 
   const fetchJobs = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/jobs");
+      const res = await axios.get("https://jobportal-backend-gkor.onrender.com/api/jobs");
       setJobs(res.data);
     } catch (error) {
       console.log(error);

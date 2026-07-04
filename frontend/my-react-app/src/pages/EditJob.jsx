@@ -21,7 +21,7 @@ function EditJob() {
 
   const fetchJob = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/jobs");
+      const res = await axios.get("https://jobportal-backend-gkor.onrender.com/api/jobs");
 
       const selectedJob = res.data.find((item) => item._id === id);
 
@@ -45,7 +45,7 @@ function EditJob() {
 
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/jobs/${id}`,
+        `https://jobportal-backend-gkor.onrender.com/api/jobs/${id}`,
         job
       );
 

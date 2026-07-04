@@ -15,7 +15,7 @@ function MyJobs() {
   const fetchMyJobs = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/jobs/my-jobs/${user._id}`
+        `https://jobportal-backend-gkor.onrender.com/api/jobs/my-jobs/${user._id}`
       );
 
       setJobs(res.data);
@@ -27,7 +27,7 @@ function MyJobs() {
   const handleDelete = async (id) => {
     try {
       const res = await axios.delete(
-        `http://localhost:5000/api/jobs/${id}`
+        `https://jobportal-backend-gkor.onrender.com/api/jobs/${id}`
       );
 
       alert(res.data.message);

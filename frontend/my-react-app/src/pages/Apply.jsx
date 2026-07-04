@@ -31,7 +31,7 @@ function Apply() {
       }
 
       const res = await axios.post(
-        "http://localhost:5000/api/applications/apply",
+        "https://jobportal-backend-gkor.onrender.com/api/apply",
         {
           userId: user._id,
           jobId: job._id,

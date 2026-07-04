@@ -25,7 +25,7 @@ function AddJob() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/jobs/add",
+        "https://jobportal-backend-gkor.onrender.com/api/jobs/add",
         {
           ...job,
           recruiter: user._id,

@@ -15,7 +15,7 @@ function Applicants() {
   const fetchApplicants = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/applications/applicants/${id}`
+        `https://jobportal-backend-gkor.onrender.com/api/applications/applicants/${id}`
       );
 
       setApplicants(res.data);
@@ -27,7 +27,7 @@ function Applicants() {
   const updateStatus = async (applicationId, status) => {
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/applications/${applicationId}`,
+        `https://jobportal-backend-gkor.onrender.com/api/applications/${applicationId}`,
         {
           status,
         }

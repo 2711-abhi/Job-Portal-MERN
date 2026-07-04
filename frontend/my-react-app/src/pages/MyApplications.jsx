@@ -15,7 +15,7 @@ const userId = user._id;
   const fetchApplications = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/applications/my-applications/${userId}`
+        `https://jobportal-backend-gkor.onrender.com/api/applications/my-applications/${userId}`
       );
 
       setApplications(res.data);
