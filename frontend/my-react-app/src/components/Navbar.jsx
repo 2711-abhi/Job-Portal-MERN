@@ -7,16 +7,13 @@ function Navbar() {
   const user = JSON.parse(localStorage.getItem("user"));
   const isRecruiter = user?.role === "recruiter";
 
-  console.log("User:", user);
-  console.log("Is Recruiter:", isRecruiter);
-
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
 
     alert("Logout Successful ✅");
 
-    navigate("/login");
+    navigate("/");
   };
 
   return (
@@ -34,6 +31,10 @@ function Navbar() {
           </>
         ) : (
           <>
+            <span style={{ marginRight: "15px", fontWeight: "bold" }}>
+              👋 {user.name}
+            </span>
+
             {isRecruiter ? (
               <>
                 <Link to="/add-job">Add Job</Link>
