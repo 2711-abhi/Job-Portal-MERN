@@ -19,6 +19,14 @@ app.use("/api/auth", authRoutes);
 app.use("/api/jobs", jobRoutes);
 app.use("/api/applications", applicationRoutes);
 
+// Home Route
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "🚀 Job Portal Backend API is Running Successfully",
+    status: "Success",
+  });
+});
+
 // Database Connection
 mongoose
   .connect(process.env.MONGO_URI)
