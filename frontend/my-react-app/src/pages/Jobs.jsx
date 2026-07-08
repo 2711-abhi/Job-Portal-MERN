@@ -13,7 +13,9 @@ function Jobs() {
 
   const fetchJobs = async () => {
     try {
-      const res = await axios.get("https://jobportal-backend-gkor.onrender.com/api/jobs");
+      const res = await axios.get(
+        "https://jobportal-backend-gkor.onrender.com/api/jobs"
+      );
       setJobs(res.data);
     } catch (error) {
       console.log(error);
@@ -21,14 +23,14 @@ function Jobs() {
   };
 
   const filteredJobs = jobs.filter((job) => {
-  const value = search.toLowerCase();
+    const value = search.toLowerCase();
 
-  return (
-    job.title.toLowerCase().includes(value) ||
-    job.company.toLowerCase().includes(value) ||
-    job.location.toLowerCase().includes(value)
-  );
-});
+    return (
+      job.title.toLowerCase().includes(value) ||
+      job.company.toLowerCase().includes(value) ||
+      job.location.toLowerCase().includes(value)
+    );
+  });
 
   return (
     <div className="jobs-container">
