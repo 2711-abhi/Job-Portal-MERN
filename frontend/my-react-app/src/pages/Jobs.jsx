@@ -20,9 +20,15 @@ function Jobs() {
     }
   };
 
-  const filteredJobs = jobs.filter((job) =>
-    job.title.toLowerCase().includes(search.toLowerCase())
+  const filteredJobs = jobs.filter((job) => {
+  const value = search.toLowerCase();
+
+  return (
+    job.title.toLowerCase().includes(value) ||
+    job.company.toLowerCase().includes(value) ||
+    job.location.toLowerCase().includes(value)
   );
+});
 
   return (
     <div className="jobs-container">
@@ -30,7 +36,7 @@ function Jobs() {
 
       <input
         type="text"
-        placeholder="Search Jobs..."
+        placeholder="Search by Job, Company or Location..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
