@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import "./Form.css";
 import axios from "axios";
 
 function Register() {
+  const navigate = useNavigate();
+
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -24,9 +28,25 @@ function Register() {
         user
       );
 
-      alert(res.data.message);
+      toast.success(res.data.message);
+
+      // Clear Form
+      setUser({
+        name: "",
+        email: "",
+        password: "",
+        role: "student",
+      });
+
+      // Redirect to Login after 2 seconds
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+
     } catch (error) {
-      alert(error.response?.data?.message || "Something went wrong");
+      toast.error(
+        error.response?.data?.message || "Something went wrong"
+      );
     }
   };
 
@@ -58,7 +78,6 @@ function Register() {
         onChange={handleChange}
       />
 
-      {/* Role Selection */}
       <select
         name="role"
         value={user.role}

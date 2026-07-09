@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 import "./Form.css";
 
 function AddJob() {
@@ -32,7 +33,7 @@ function AddJob() {
         }
       );
 
-      alert(res.data.message);
+      toast.success(res.data.message);
 
       setJob({
         title: "",
@@ -41,8 +42,11 @@ function AddJob() {
         salary: "",
         description: "",
       });
+
     } catch (error) {
-      alert(error.response?.data?.message || "Error adding job");
+      toast.error(
+        error.response?.data?.message || "Error adding job"
+      );
     }
   };
 
@@ -81,7 +85,7 @@ function AddJob() {
         <input
           type="text"
           name="salary"
-          placeholder="Salary"
+          placeholder="Salary (Example: 5 LPA)"
           value={job.salary}
           onChange={handleChange}
           required

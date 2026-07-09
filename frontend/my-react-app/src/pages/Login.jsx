@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import axios from "axios";
 import "./Form.css";
 
@@ -17,33 +18,31 @@ function Login() {
       [e.target.name]: e.target.value,
     });
   };
+const handleSubmit = async () => {
+  try {
+    const res = await axios.post(
+      "https://jobportal-backend-gkor.onrender.com/api/auth/login",
+      user
+    );
 
-  const handleSubmit = async () => {
-    try {
-      const res = await axios.post(
-        "https://jobportal-backend-gkor.onrender.com/api/auth/login",
-        user
-      );
+    // Save Token
+    localStorage.setItem("token", res.data.token);
 
-      // Save Token
-      localStorage.setItem("token", res.data.token);
+    // Save User
+    localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      // Save User
-      localStorage.setItem("user", JSON.stringify(res.data.user));
+    toast.success(res.data.message);
 
-      alert(res.data.message);
-
-      // Redirect according to role
-      if (res.data.user.role === "student") {
-        navigate("/jobs");
-      } else {
-        navigate("/add-job");
-      }
-
-    } catch (error) {
-      alert(error.response?.data?.message || "Something went wrong");
+    if (res.data.user.role === "student") {
+      navigate("/jobs");
+    } else {
+      navigate("/add-job");
     }
-  };
+
+  } catch (error) {
+    toast.error(error.response?.data?.message || "Something went wrong");
+  }
+};
 
   return (
     <div className="form-container">
