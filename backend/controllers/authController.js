@@ -2,12 +2,11 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 
-// Register User
+// ================= Register =================
 const registerUser = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
 
-    // Check if user already exists
     const userExists = await User.findOne({ email });
 
     if (userExists) {
@@ -16,10 +15,8 @@ const registerUser = async (req, res) => {
       });
     }
 
-    // Encrypt Password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create New User
     const user = await User.create({
       name,
       email,
@@ -38,13 +35,11 @@ const registerUser = async (req, res) => {
   }
 };
 
-// Login User
+// ================= Login =================
 const loginUser = async (req, res) => {
-console.log("🔥 Login Controller Running");
   try {
     const { email, password } = req.body;
 
-    // Check if user exists
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -53,7 +48,6 @@ console.log("🔥 Login Controller Running");
       });
     }
 
-    // Check password
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
@@ -62,23 +56,56 @@ console.log("🔥 Login Controller Running");
       });
     }
 
-    // Generate JWT Token
-const token = jwt.sign(
-  {
-    id: user._id,
-    role: user.role,
-  },
-  process.env.JWT_SECRET,
-  {
-    expiresIn: "7d",
-  }
-);
+    const token = jwt.sign(
+      {
+        id: user._id,
+        role: user.role,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "7d",
+      }
+    );
 
-res.status(200).json({
-  message: "Login Successful ✅",
-  token,
-  user,
-});
+    res.status(200).json({
+      message: "Login Successful ✅",
+      token,
+      user,
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
+// ================= Update Profile =================
+const updateProfile = async (req, res) => {
+  try {
+    const { id, name, email, password } = req.body;
+
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    user.name = name;
+    user.email = email;
+
+    if (password && password.trim() !== "") {
+      user.password = await bcrypt.hash(password, 10);
+    }
+
+    await user.save();
+
+    res.status(200).json({
+      message: "Profile Updated Successfully ✅",
+      user,
+    });
 
   } catch (error) {
     res.status(500).json({
@@ -90,4 +117,5 @@ res.status(200).json({
 module.exports = {
   registerUser,
   loginUser,
+  updateProfile,
 };
