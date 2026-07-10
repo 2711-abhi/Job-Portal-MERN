@@ -35,6 +35,9 @@ function Navbar() {
               👋 {user.name}
             </span>
 
+            {/* Dashboard */}
+            <Link to="/dashboard">Dashboard</Link>
+
             {isRecruiter ? (
               <>
                 <Link to="/add-job">Add Job</Link>

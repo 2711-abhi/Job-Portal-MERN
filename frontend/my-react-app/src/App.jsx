@@ -16,6 +16,7 @@ import AddJob from "./pages/AddJob";
 import MyJobs from "./pages/MyJobs";
 import EditJob from "./pages/EditJob";
 import Applicants from "./pages/Applicants";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -107,6 +108,15 @@ function App() {
           element={
             <ProtectedRoute>
               <Applicants />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+               <Dashboard />
             </ProtectedRoute>
           }
         />
