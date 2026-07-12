@@ -22,6 +22,24 @@ function Jobs() {
     }
   };
 
+  const saveJob = async (jobId) => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      const res = await axios.post(
+        "https://jobportal-backend-gkor.onrender.com/api/saved-jobs/save",
+        {
+          userId: user._id,
+          jobId,
+        }
+      );
+
+      alert(res.data.message);
+    } catch (error) {
+      alert(error.response?.data?.message || "Error saving job");
+    }
+  };
+
   const filteredJobs = jobs.filter((job) => {
     const value = search.toLowerCase();
 
@@ -78,6 +96,10 @@ function Jobs() {
               >
                 <button>Apply Now</button>
               </Link>
+
+              <button onClick={() => saveJob(job._id)}>
+                ❤️ Save Job
+              </button>
             </div>
           ))
         ) : (

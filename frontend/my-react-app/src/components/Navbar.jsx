@@ -50,6 +50,7 @@ function Navbar() {
             )}
 
             <Link to="/profile">Profile</Link>
+            <Link to="/saved-jobs">⭐ Saved Jobs</Link>
 
             <button onClick={handleLogout}>Logout</button>
           </>
