@@ -8,6 +8,8 @@ function Apply() {
     email: "",
   });
 
+  const [resume, setResume] = useState(null);
+
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -30,11 +32,24 @@ function Apply() {
         return;
       }
 
+      if (!resume) {
+        alert("Please upload your resume.");
+        return;
+      }
+
+      const formData = new FormData();
+
+      formData.append("userId", user._id);
+      formData.append("jobId", job._id);
+      formData.append("resume", resume);
+
       const res = await axios.post(
         "https://jobportal-backend-gkor.onrender.com/api/applications/apply",
+        formData,
         {
-          userId: user._id,
-          jobId: job._id,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
 
@@ -44,6 +59,9 @@ function Apply() {
         name: "",
         email: "",
       });
+
+      setResume(null);
+
     } catch (error) {
       alert(error.response?.data?.message || "Something went wrong");
     }
@@ -69,7 +87,11 @@ function Apply() {
         onChange={handleChange}
       />
 
-      <input type="file" />
+      <input
+        type="file"
+        accept=".pdf"
+        onChange={(e) => setResume(e.target.files[0])}
+      />
 
       <button onClick={handleSubmit}>
         Submit Application

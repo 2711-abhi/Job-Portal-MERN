@@ -19,10 +19,14 @@ const applyJob = async (req, res) => {
       });
     }
 
+    // Resume URL from Cloudinary
+    const resumeUrl = req.file ? req.file.path : "";
+
     // Create application
     const application = await Application.create({
       user: userId,
       job: jobId,
+      resume: resumeUrl,
     });
 
     res.status(201).json({
