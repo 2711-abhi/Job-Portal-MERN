@@ -44,7 +44,7 @@ function Apply() {
       formData.append("resume", resume);
 
       const res = await axios.post(
-        "https://jobportal-backend-gkor.onrender.com/api/applications/apply",
+        "http://localhost:5000/api/applications/apply",
         formData,
         {
           headers: {

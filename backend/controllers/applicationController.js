@@ -5,6 +5,9 @@ const User = require("../models/User");
 // Apply for a Job
 const applyJob = async (req, res) => {
   try {
+
+    console.log("FILE OBJECT:", JSON.stringify(req.file, null, 2));
+    
     const { userId, jobId } = req.body;
 
     // Check if already applied
